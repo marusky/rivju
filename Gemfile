@@ -35,6 +35,7 @@ gem "redis", "~> 4.0"
 gem 'haml', '~> 6.1', '>= 6.1.1'
 gem 'html2haml', '~> 2.3'
 gem "haml-rails", "~> 2.0"
+gem 'devise'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
