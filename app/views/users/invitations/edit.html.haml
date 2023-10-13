@@ -2,15 +2,15 @@
 = form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f|
   = render "devise/shared/error_messages", resource: resource
   = f.hidden_field :invitation_token, readonly: true
+  .field
+    = f.label :first_name
+    %br/
+    = f.text_field :first_name
+  .field
+    = f.label :last_name
+    %br/
+    = f.text_field :last_name
   - if f.object.class.require_password_on_accepting
-    .field
-      = f.label :first_name
-      %br/
-      = f.text_field :first_name
-    .field
-      = f.label :last_name
-      %br/
-      = f.text_field :last_name
     .field
       = f.label :password
       %br/

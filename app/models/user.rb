@@ -12,4 +12,8 @@ class User < ApplicationRecord
     'Users::Teacher' => 1,
     'Users::Admin' => 2
   }
+
+  def name
+    first_name + ' ' + last_name
+  end
 end
