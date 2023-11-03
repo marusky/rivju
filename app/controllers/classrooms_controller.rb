@@ -1,9 +1,10 @@
 class ClassroomsController < ApplicationController
   before_action :set_classroom, only: %i[ show edit update destroy ]
+  include Pundit::Authorization
 
   # GET /classrooms or /classrooms.json
   def index
-    @classrooms = Classroom.all
+    @classrooms = policy_scope(Classroom)
   end
 
   # GET /classrooms/1 or /classrooms/1.json
@@ -12,7 +13,7 @@ class ClassroomsController < ApplicationController
 
   # GET /classrooms/new
   def new
-    @classroom = Classroom.new
+    @classroom = authorize Classroom.new
   end
 
   # GET /classrooms/1/edit
@@ -21,8 +22,7 @@ class ClassroomsController < ApplicationController
 
   # POST /classrooms or /classrooms.json
   def create
-    @classroom = Classroom.new(classroom_params)
-    @classroom.teacher = current_user
+    @classroom = authorize Classroom.new(classroom_params.merge(teacher: current_user))
 
     respond_to do |format|
       if @classroom.save
@@ -61,7 +61,7 @@ class ClassroomsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_classroom
-      @classroom = Classroom.find(params[:id])
+      @classroom = authorize Classroom.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

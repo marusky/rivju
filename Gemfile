@@ -38,6 +38,7 @@ gem "haml-rails", "~> 2.0"
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
 gem "hashid-rails", "~> 1.0"
+gem 'pundit', '~> 2.3', '>= 2.3.1'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

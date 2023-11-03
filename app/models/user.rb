@@ -16,4 +16,16 @@ class User < ApplicationRecord
   def name
     first_name + ' ' + last_name
   end
+
+  def admin?
+    type == 'Users::Admin'
+  end
+
+  def teacher?
+    type == 'Users::Teacher'
+  end
+
+  def student?
+    type == 'Users::Student'
+  end
 end
