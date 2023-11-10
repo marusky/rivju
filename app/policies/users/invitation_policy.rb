@@ -1,4 +1,11 @@
 class Users::InvitationPolicy < ApplicationPolicy
+  def initialize(user, record)
+    # raise Pundit::NotAuthorizedError, "must be logged in" unless user
+
+    @user = user
+    @record = record
+  end
+
   def new?
     teacher_or_admin?
   end
@@ -8,7 +15,7 @@ class Users::InvitationPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    if user.admin?
+    if user&.admin?
       [:classroom_id, :type]
     else
       [:classroom_id, type: ['Users::Student']]

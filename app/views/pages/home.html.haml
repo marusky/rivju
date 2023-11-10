@@ -1,8 +1,8 @@
-%h1 Pages#home
-%p Find me in app/views/pages/home.html.haml
+.mb-4
+  = link_to 'classrooms', classrooms_path, class: 'px-5 py-2 bg-teal-300 rounded-2xl'
 
 - if user_signed_in?
-  = button_to 'logout', destroy_user_session_path, method: :delete
+  = button_to 'logout', destroy_user_session_path, method: :delete, class: 'px-5 py-2 bg-pink-600 rounded-2xl'
 
 
 %p

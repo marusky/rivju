@@ -15,10 +15,17 @@
 %p
   %b Students:
   %br
-  - @classroom.students.each do |student|
+  - @classroom.students.where.not(invitation_accepted_at: nil).each do |student|
     = student.name
     %br
+
+%p
+  %b Invitees:
   %br
+  - @classroom.students.where(invitation_accepted_at: nil).each do |student|
+    = student.email
+    %br
+
 
 %p
   %b Link pre študentov:
