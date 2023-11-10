@@ -4,7 +4,15 @@ class Users::InvitationPolicy < ApplicationPolicy
   end
 
   def create?
-    teacher_or_admin?
+    user.admin? || user.teaches_classroom(record)
+  end
+
+  def permitted_attributes
+    if user.admin?
+      [:classroom_id, :type]
+    else
+      [:classroom_id, type: ['Users::Student']]
+    end
   end
 
   private
@@ -14,5 +22,6 @@ class Users::InvitationPolicy < ApplicationPolicy
   end
 
   class Scope < Scope
+
   end
 end

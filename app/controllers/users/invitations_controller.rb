@@ -1,22 +1,29 @@
 class Users::InvitationsController < Devise::InvitationsController
   include Pundit::Authorization
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
 
   def new
-    authorize [:users, :invitation], :new?
+    authorize [:users, :invitation]
 
     super
   end
 
   def create
-    authorize [:users, :invitation], :create?
+    classroom_invited_to = Classroom.find(params[:user][:classroom_id])
 
-    # kedy mozem vytvorit pozvanku?
-    # ak som admin
-    # alebo ak som ucitel a pozyvam ziaka do triedy, ktoru ucim
-    super do |resource|
-      authorize [:users, :invitation], resource
-    end
+    authorize classroom_invited_to, policy_class: Users::InvitationPolicy
+
+    super
+  end
+
+  private
+
+  def after_invite_path_for(inviter, invitee = nil)
+    classroom_path(invitee.classroom)
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:invite, keys: policy([:users, :invitation]).permitted_attributes)
   end
 end

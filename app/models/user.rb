@@ -14,7 +14,7 @@ class User < ApplicationRecord
   }
 
   def name
-    first_name + ' ' + last_name
+    "#{first_name} #{last_name}"
   end
 
   def admin?
@@ -27,5 +27,9 @@ class User < ApplicationRecord
 
   def student?
     type == 'Users::Student'
+  end
+
+  def teaches_classroom(classroom)
+    classroom.user_id == id
   end
 end

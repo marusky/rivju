@@ -1,6 +1,23 @@
 # frozen_string_literal: true
 
 class ApplicationPolicy
+  class Scope
+    def initialize(user, scope)
+      raise Pundit::NotAuthorizedError, "must be logged in" unless user
+
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+      raise NotImplementedError, "You must define #resolve in #{self.class}"
+    end
+
+    private
+
+    attr_reader :user, :scope
+  end
+
   attr_reader :user, :record
 
   def initialize(user, record)
@@ -36,22 +53,5 @@ class ApplicationPolicy
 
   def destroy?
     false
-  end
-
-  class Scope
-    def initialize(user, scope)
-      raise Pundit::NotAuthorizedError, "must be logged in" unless user
-
-      @user = user
-      @scope = scope
-    end
-
-    def resolve
-      raise NotImplementedError, "You must define #resolve in #{self.class}"
-    end
-
-    private
-
-    attr_reader :user, :scope
   end
 end

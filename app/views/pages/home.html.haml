@@ -7,3 +7,16 @@
 
 %p
   \- nech ma trieda aj take nastavenia, ze ci sa da student pozyvat a ak ano, tak ako (ze moze byt aj uz aj uzamknute pridavanie alebo take daco)
+%p
+  upratat permitted params vsetky do policies
+%p
+
+
+
+%ul
+  %li
+    ked chce admin pozvat ucitela, tak tam blbne to, ze classroom je nil
+  %li
+    pundit obmedzi moznost teachera pozvat iba na studenta a potom nejako blbne validacia, lebo to nevypise chybu, ale proste
+    to nepusti cez permitted params a tym padom type sa automaticky da na nulu kvoli defaultu v DB - to niekedy fixnut
+    aby to pekne vypisovalo tu chybu a nie takuto blbost
