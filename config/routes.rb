@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :assignments
+  resources :assignments, except: :index
   resources :courses
   resources :classrooms
   devise_for :users, path: '',
