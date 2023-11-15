@@ -1,3 +1,7 @@
+- if user_signed_in?
+  .text-3xl.mb-12.font-bold
+    Pekný deň,
+    = current_user.first_name + '!'
 .mb-4
   = link_to 'classrooms', classrooms_path, class: 'px-5 py-2 bg-teal-300 rounded-2xl'
 

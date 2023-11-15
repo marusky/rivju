@@ -9,7 +9,7 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def create
-    classroom_invited_to = Classroom.find(params[:user][:classroom_id])
+    classroom_invited_to = Classroom.find_by(id: params[:user][:classroom_id])
 
     authorize classroom_invited_to, policy_class: Users::InvitationPolicy
 
@@ -19,6 +19,8 @@ class Users::InvitationsController < Devise::InvitationsController
   private
 
   def after_invite_path_for(inviter, invitee = nil)
+    return new_user_invitation_path if current_user.admin?
+
     classroom_path(invitee.classroom)
   end
 

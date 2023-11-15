@@ -54,4 +54,10 @@ class ApplicationPolicy
   def destroy?
     false
   end
+
+  private
+
+  def taught_by_or_admin?
+    user.teacher? && record.taught_by?(user) || user.admin?
+  end
 end
