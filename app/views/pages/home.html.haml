@@ -4,15 +4,18 @@
     = current_user.first_name + '!'
 .mb-4
   = link_to 'classrooms', classrooms_path, class: 'px-5 py-2 bg-teal-300 rounded-2xl'
+.mb-4
+  = link_to 'courses', courses_path, class: 'px-5 py-2 bg-sky-400 rounded-2xl'
 
-- if user_signed_in?
-  = button_to 'logout', destroy_user_session_path, method: :delete, class: 'px-5 py-2 bg-pink-600 rounded-2xl'
+.mb-4
+  - if user_signed_in?
+    = button_to 'logout', destroy_user_session_path, method: :delete, class: 'px-5 py-2 bg-pink-600 rounded-2xl'
+  - else
+    = link_to 'login', new_user_session_path, class: 'px-5 py-2 bg-pink-600 rounded-2xl'
 
 
 
 najblizsi piatok:
-vytvoril som podla excalidraw vsetko po assignments, ale nie je to precisteny kod ani poupratovane
-policies (tie tam nie su ziadne)
 
 mozes pokracovat na tom, urobit tam policies, domysliet, ak by sa nieco malo diat inak, ako sa deje
 
@@ -30,8 +33,6 @@ a potom dalej pracovat na tom samotnom review procese
 
 
 %ul
-  %li
-    ked chce admin pozvat ucitela, tak tam blbne to, ze classroom je nil
   %li
     pundit obmedzi moznost teachera pozvat iba na studenta a potom nejako blbne validacia, lebo to nevypise chybu, ale proste
     to nepusti cez permitted params a tym padom type sa automaticky da na nulu kvoli defaultu v DB - to niekedy fixnut

@@ -11,22 +11,22 @@ class ClassroomPolicy < ApplicationPolicy
   end
 
   def show?
-    taught_by_or_admin?
+    admin_or_allowed?
   end
 
   def new?
-    user.teacher? || user.admin?
+    admin_or_teacher?
   end
 
   def create?
-    taught_by_or_admin?
+    admin_or_allowed?
   end
 
   def update?
-    taught_by_or_admin?
+    admin_or_allowed?
   end
 
   def destroy?
-    taught_by_or_admin?
+    admin_or_allowed?
   end
 end

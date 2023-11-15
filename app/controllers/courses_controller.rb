@@ -1,8 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
   include Pundit::Authorization
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
 
   # GET /courses or /courses.json
   def index

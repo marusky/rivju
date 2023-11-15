@@ -1,11 +1,7 @@
-class CoursePolicy < ApplicationPolicy
+class AssignmentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.admin?
-        scope.all
-      else
-        scope.where(teacher: user)
-      end
+      scope.all
     end
   end
 
@@ -27,5 +23,11 @@ class CoursePolicy < ApplicationPolicy
 
   def destroy?
     admin_or_allowed?
+  end
+
+  private
+
+  def admin_or_allowed?
+    user.admin? || user.teacher? && record.from_course_by_teacher?(user)
   end
 end

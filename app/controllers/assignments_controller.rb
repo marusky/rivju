@@ -1,9 +1,12 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: %i[ show edit update destroy ]
+  include Pundit::Authorization
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   # GET /assignments or /assignments.json
   def index
-    @assignments = Assignment.all
+    @assignments = policy_scope(Assignment)
   end
 
   # GET /assignments/1 or /assignments/1.json
@@ -12,7 +15,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/new
   def new
-    @assignment = Assignment.new
+    @assignment = authorize Assignment.new
   end
 
   # GET /assignments/1/edit
@@ -21,7 +24,7 @@ class AssignmentsController < ApplicationController
 
   # POST /assignments or /assignments.json
   def create
-    @assignment = Assignment.new(assignment_params)
+    @assignment = authorize Assignment.new(assignment_params)
 
     respond_to do |format|
       if @assignment.save
@@ -60,7 +63,7 @@ class AssignmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_assignment
-      @assignment = Assignment.find(params[:id])
+      @assignment = authorize Assignment.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

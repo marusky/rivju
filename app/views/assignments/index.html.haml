@@ -15,7 +15,7 @@
       %tr
         %td= assignment.name
         %td= assignment.description
-        %td= assignment.course
+        %td= assignment.course.name
         %td= link_to 'Show', assignment
         %td= link_to 'Edit', edit_assignment_path(assignment)
         %td= button_to 'Destroy', assignment, method: :delete, data: { turbo_confirm: 'Are you sure?' }

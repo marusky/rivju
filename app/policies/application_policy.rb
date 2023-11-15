@@ -57,7 +57,11 @@ class ApplicationPolicy
 
   private
 
-  def taught_by_or_admin?
-    user.teacher? && record.taught_by?(user) || user.admin?
+  def admin_or_allowed?
+    user.admin? || user.teacher? && record.taught_by?(user)
+  end
+
+  def admin_or_teacher?
+    user.admin? || user.teacher?
   end
 end
