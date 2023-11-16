@@ -13,6 +13,25 @@
   = complete_school_year(@classroom.school_year)
 
 %p
+  = link_to 'Add Task', course_choice_path(classroom_id: @classroom.id)
+%p
+  %b Tasks:
+%table
+  %thead
+    %tr
+      %th Name
+      %th 1st phase
+      %th 2nd phase
+      %th 3rd phase
+  %tbody
+    - @classroom.tasks.each do |task|
+      %tr
+        %td= task.name
+        %td= l task.first_submission_deadline
+        %td= l task.review_deadline
+        %td= l task.second_submission_deadline
+
+%p
   %b Students:
   %br
   - @classroom.students.where.not(invitation_accepted_at: nil).each do |student|

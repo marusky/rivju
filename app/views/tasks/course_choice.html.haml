@@ -1,0 +1,2 @@
+- @courses.each do |course|
+  = link_to course.name, assignment_choice_path(course_id: course.id, classroom_id: params[:classroom_id])

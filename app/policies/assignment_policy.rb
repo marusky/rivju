@@ -1,7 +1,11 @@
 class AssignmentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      if user.admin?
+        scope.all
+      else
+        scope.where(course_id: user.course_ids)
+      end
     end
   end
 

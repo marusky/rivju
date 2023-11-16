@@ -1,5 +1,6 @@
 class Assignment < ApplicationRecord
   belongs_to :course
+  has_many :tasks
 
   validates :name, :description, presence: true
 

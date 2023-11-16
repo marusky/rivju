@@ -1,0 +1,2 @@
+- @assignments.each do |assignment|
+  = link_to assignment.name, new_task_path(assignment_id: assignment.id, classroom_id: params[:classroom_id])

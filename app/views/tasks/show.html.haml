@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @task.name
+%p
+  %b Description:
+  = @task.description
+%p
+  %b Classroom:
+  = @task.classroom
+%p
+  %b Assignment:
+  = @task.assignment
+%p
+  %b First submission deadline:
+  = @task.first_submission_deadline
+%p
+  %b Review deadline:
+  = @task.review_deadline
+%p
+  %b Second submission deadline:
+  = @task.second_submission_deadline
+
+= link_to 'Edit', edit_task_path(@task)
+\|
+= link_to 'Back', tasks_path

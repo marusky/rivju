@@ -1,0 +1,33 @@
+%h1 Listing tasks
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Classroom
+      %th Assignment
+      %th First submission deadline
+      %th Review deadline
+      %th Second submission deadline
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tasks.each do |task|
+      %tr
+        %td= task.name
+        %td= task.description
+        %td= task.classroom.name
+        %td= task.assignment.name
+        %td= task.first_submission_deadline
+        %td= task.review_deadline
+        %td= task.second_submission_deadline
+        %td= link_to 'Show', task
+        %td= link_to 'Edit', edit_task_path(task)
+        %td= button_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Task', new_task_path

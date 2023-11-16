@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  classroom: one
+  assignment: one
+  first_submission_deadline: 2023-11-16 08:32:22
+  review_deadline: 2023-11-16 08:32:22
+  second_submission_deadline: 2023-11-16 08:32:22
+
+two:
+  name: MyString
+  description: MyString
+  classroom: two
+  assignment: two
+  first_submission_deadline: 2023-11-16 08:32:22
+  review_deadline: 2023-11-16 08:32:22
+  second_submission_deadline: 2023-11-16 08:32:22
