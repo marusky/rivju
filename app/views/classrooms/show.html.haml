@@ -26,7 +26,7 @@
   %tbody
     - @classroom.tasks.each do |task|
       %tr
-        %td= task.name
+        %td= link_to task.name, task
         %td= l task.first_submission_deadline
         %td= l task.review_deadline
         %td= l task.second_submission_deadline

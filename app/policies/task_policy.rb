@@ -1,10 +1,18 @@
 class TaskPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      super do
+      if user.admin?
+        scope.all
+      elsif user.teacher?
         scope.where(classroom_id: user.classroom_ids)
+      elsif user.student?
+        scope.where(classroom_id: user.classroom_id)
       end
     end
+  end
+
+  def show?
+    true
   end
 
   def course_choice?

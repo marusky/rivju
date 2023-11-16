@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :submissions
   resources :tasks
   get 'course_choice', to: 'tasks#course_choice'
   get 'assignment_choice', to: 'tasks#assignment_choice'

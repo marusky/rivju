@@ -1,17 +1,14 @@
 %p#notice= notice
 
 %p
+  = link_to 'Submit project', new_submission_path(task_id: @task.id, version: :first)
+
+%p
   %b Name:
   = @task.name
 %p
   %b Description:
   = @task.description
-%p
-  %b Classroom:
-  = @task.classroom
-%p
-  %b Assignment:
-  = @task.assignment
 %p
   %b First submission deadline:
   = @task.first_submission_deadline

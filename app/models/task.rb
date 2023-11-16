@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  has_many :submissions
   belongs_to :classroom
   belongs_to :assignment
 

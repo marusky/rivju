@@ -1,0 +1,27 @@
+%h1 Listing submissions
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Task
+      %th File
+      %th Version
+      %th
+      %th
+      %th
+
+  %tbody
+    - @submissions.each do |submission|
+      %tr
+        %td= submission.student.name
+        %td= submission.task.name
+        %td= submission.file
+        %td= submission.version
+        %td= link_to 'Show', submission
+        %td= link_to 'Edit', edit_submission_path(submission)
+        %td= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Submission', new_submission_path
