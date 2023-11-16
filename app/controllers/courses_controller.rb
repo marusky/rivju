@@ -43,7 +43,7 @@ class CoursesController < ApplicationController
   private
 
   def set_course
-    @course = authorize Course.find(params[:id])
+    @course = authorize policy_scope(Course).find(params[:id])
   end
 
   def course_params

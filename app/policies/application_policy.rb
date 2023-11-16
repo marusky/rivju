@@ -10,7 +10,11 @@ class ApplicationPolicy
     end
 
     def resolve
-      raise NotImplementedError, "You must define #resolve in #{self.class}"
+      if user.admin?
+        scope.all
+      else
+        yield
+      end
     end
 
     private
@@ -32,27 +36,27 @@ class ApplicationPolicy
   end
 
   def show?
-    false
+    admin_or_teacher?
   end
 
   def create?
-    false
+    admin_or_allowed?
   end
 
   def new?
-    create?
+    admin_or_teacher?
   end
 
   def update?
-    false
+    admin_or_allowed?
   end
 
   def edit?
-    update?
+    admin_or_teacher?
   end
 
   def destroy?
-    false
+    admin_or_teacher?
   end
 
   private

@@ -43,7 +43,7 @@ class ClassroomsController < ApplicationController
   private
 
   def set_classroom
-    @classroom = authorize Classroom.find(params[:id])
+    @classroom = authorize policy_scope(Classroom).find(params[:id])
   end
 
   def classroom_params

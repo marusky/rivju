@@ -39,7 +39,7 @@ class AssignmentsController < ApplicationController
   private
 
   def set_assignment
-    @assignment = authorize Assignment.find(params[:id])
+    @assignment = authorize policy_scope(Assignment).find(params[:id])
   end
 
   def assignment_params
