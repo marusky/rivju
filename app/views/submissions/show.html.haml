@@ -10,10 +10,10 @@
   %b File:
   = link_to 'Download', rails_blob_path(@submission.file, disposition: "attachment")
 
-%pre
-  - @submission.file.download.split("\n").each do |line|
-    = sanitize line.gsub(/\s/, "&nbsp;").gsub('<', '&lt;').gsub('>', '&gt;')
-    %br
+%pre{ data: { controller: 'highlighter' } }
+  %code
+    = @submission.file.download
+
 
 %p
   %b Version:
