@@ -28,6 +28,7 @@
           = distance_of_time_in_words(first_submission.updated_at, DateTime.now) + ' ago'
           %span
             1. verzia odovzdana
+          = link_to 'Prezriet', first_submission
           = link_to 'Nahradit', edit_submission_path(first_submission)
           = button_to 'Vymazat', first_submission, method: :delete
 

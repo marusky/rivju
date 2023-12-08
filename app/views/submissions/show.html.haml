@@ -1,12 +1,6 @@
 %p#notice= notice
 
 %p
-  %b User:
-  = @submission.student.name
-%p
-  %b Task:
-  = @submission.task.name
-%p
   %b File:
   = link_to 'Download', rails_blob_path(@submission.file, disposition: "attachment")
 
@@ -18,7 +12,3 @@
 %p
   %b Version:
   = @submission.version
-
-= link_to 'Edit', edit_submission_path(@submission)
-\|
-= link_to 'Back', submissions_path
