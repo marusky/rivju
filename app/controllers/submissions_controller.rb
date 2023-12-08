@@ -12,7 +12,13 @@ class SubmissionsController < ApplicationController
 
   # GET /submissions/new
   def new
-    @submission = Submission.new(task_id: params[:task_id], version: params[:version])
+    if params[:task_id]
+      @project = Project.find_or_create_by(student: current_user, task_id: params[:task_id])
+    else
+      @project = Project.find(params[:project_id])
+    end
+
+    @submission = Submission.new(project_id: @project.id, version: params[:version])
   end
 
   # GET /submissions/1/edit
@@ -21,29 +27,21 @@ class SubmissionsController < ApplicationController
 
   # POST /submissions or /submissions.json
   def create
-    @submission = Submission.new(submission_params.merge(student: current_user))
+    @submission = Submission.new(submission_params)
 
-    respond_to do |format|
-      if @submission.save
-        format.html { redirect_to submission_url(@submission), notice: "Submission was successfully created." }
-        format.json { render :show, status: :created, location: @submission }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
+    if @submission.save
+      redirect_to @submission.project, notice: "Submission was successfully updated."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /submissions/1 or /submissions/1.json
   def update
-    respond_to do |format|
-      if @submission.update(submission_params)
-        format.html { redirect_to submission_url(@submission), notice: "Submission was successfully updated." }
-        format.json { render :show, status: :ok, location: @submission }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
+    if @submission.update(submission_params)
+      redirect_to @submission.project, notice: "Submission was successfully created."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -51,10 +49,7 @@ class SubmissionsController < ApplicationController
   def destroy
     @submission.destroy
 
-    respond_to do |format|
-      format.html { redirect_to submissions_url, notice: "Submission was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to @submission.project, notice: "Submission was successfully destroyed."
   end
 
   private
@@ -65,6 +60,6 @@ class SubmissionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def submission_params
-      params.require(:submission).permit(:user_id, :task_id, :file, :version)
+      params.require(:submission).permit(:project_id, :file, :version)
     end
 end

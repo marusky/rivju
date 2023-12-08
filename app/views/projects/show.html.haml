@@ -1,0 +1,36 @@
+- first_submission = @submissions.first
+
+.header.flex.justify-between.items-center.mb-10
+  .name-and-author
+    .text-3xl.font-bold
+      = @project.task.name
+    .text-xl
+      = @project.student.name
+  .action-btn
+    - if @project.task.phase == :first_submission
+      - if first_submission
+        = link_to edit_submission_path(first_submission) do
+          .px-12.py-2.rounded-full.bg-gradient-to-br.from-blue-400.to-sky-700.text-white
+            Nahradiť
+      - else
+        = link_to new_submission_path(project_id: @project.id, version: :first) do
+          .px-12.py-2.rounded-full.bg-gradient-to-br.from-teal-400.to-sky-700.text-white
+            Nahrať
+.body.flex
+  .left
+    .description.mb-10
+      = @project.task.description
+
+    - if first_submission
+      .first-submission.flex.items-center.gap-3
+        .w-12.h-12.bg-gray-900.rounded-full
+        .bg-gray-300.rounded-full.w-full.h-20.flex.items-center.gap-4.px-5
+          = distance_of_time_in_words(first_submission.updated_at, DateTime.now) + ' ago'
+          %span
+            1. verzia odovzdana
+          = link_to 'Nahradit', edit_submission_path(first_submission)
+          = button_to 'Vymazat', first_submission, method: :delete
+
+  .right.px-20
+    .text-3xl
+      = distance_of_time_in_words(@project.task.time_left) + ' left'

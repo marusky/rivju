@@ -1,24 +1,10 @@
-%p#notice= notice
-
-%p
-  = link_to 'Submit project', new_submission_path(task_id: @task.id, version: :first)
-
-%p
-  %b Name:
-  = @task.name
-%p
-  %b Description:
+.header.flex.justify-between.items-center.mb-10
+  .name-and-author
+    .text-3xl.font-bold
+      = @task.name
+  .action-btn
+    = link_to new_submission_path(task_id: @task.id, version: :first) do
+      .px-12.py-2.rounded-full.bg-gradient-to-br.from-teal-400.to-sky-700.text-white
+        Nahrať
+.description.mr-80
   = @task.description
-%p
-  %b First submission deadline:
-  = @task.first_submission_deadline
-%p
-  %b Review deadline:
-  = @task.review_deadline
-%p
-  %b Second submission deadline:
-  = @task.second_submission_deadline
-
-= link_to 'Edit', edit_task_path(@task)
-\|
-= link_to 'Back', tasks_path

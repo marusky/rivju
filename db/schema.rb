@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_16_112510) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_08_162203) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,14 +68,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_16_112510) do
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
-  create_table "submissions", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "projects", force: :cascade do |t|
     t.bigint "task_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_projects_on_task_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.bigint "project_id", null: false
     t.integer "version", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_submissions_on_task_id"
-    t.index ["user_id"], name: "index_submissions_on_user_id"
+    t.index ["project_id"], name: "index_submissions_on_project_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -127,8 +134,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_16_112510) do
   add_foreign_key "assignments", "courses"
   add_foreign_key "classrooms", "users"
   add_foreign_key "courses", "users"
-  add_foreign_key "submissions", "tasks"
-  add_foreign_key "submissions", "users"
+  add_foreign_key "projects", "tasks"
+  add_foreign_key "projects", "users"
+  add_foreign_key "submissions", "projects"
   add_foreign_key "tasks", "assignments"
   add_foreign_key "tasks", "classrooms"
   add_foreign_key "users", "classrooms"

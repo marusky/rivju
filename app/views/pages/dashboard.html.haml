@@ -1,0 +1,27 @@
+.text-3xl.mb-4.font-bold
+  Pekný deň,
+  = current_user.first_name + '!'
+
+- if current_user.student?
+  .text-xl.mb-4
+    To-do
+  .flex.flex-row.mb-8
+    - if @projects.present?
+      - @projects.each do |project|
+        = link_to project do
+          .w-52.h-32.rounded-3xl.flex.flex-col.justify-center.items-center.bg-gradient-to-br.from-gray-100.to-gray-300
+            .font-bold
+              = project.task.name
+            %span
+              = project.task.phase
+    - else
+      - @tasks.each do |task|
+        = link_to task do
+          .w-52.h-32.rounded-3xl.flex.flex-col.justify-center.items-center.bg-gradient-to-br.from-gray-100.to-gray-300
+            .font-bold
+              = task.name
+            %span
+              = task.phase
+  
+  .text-xl
+    To-rivju

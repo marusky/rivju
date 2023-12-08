@@ -1,6 +1,5 @@
 class Submission < ApplicationRecord
-  belongs_to :student, class_name: 'Users::Student', foreign_key: :user_id
-  belongs_to :task
+  belongs_to :project
   has_one_attached :file
 
   enum version: {

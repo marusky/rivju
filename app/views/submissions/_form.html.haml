@@ -6,8 +6,8 @@
         - @submission.errors.full_messages.each do |message|
           %li= message
 
-  = f.hidden_field :task_id, value: @submission.task_id
-  = f.hidden_field :version, value: @submission.version
+  = f.hidden_field :project_id
+  = f.hidden_field :version
   .field
     = f.label :file
     = f.file_field :file
