@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviews
   get 'dashboard', to: 'pages#dashboard'
   resources :submissions
   resources :tasks

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_08_162203) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_09_151130) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -77,6 +77,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_08_162203) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "state", default: 0, null: false
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_reviews_on_project_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "submissions", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.integer "version", default: 1, null: false
@@ -136,6 +146,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_08_162203) do
   add_foreign_key "courses", "users"
   add_foreign_key "projects", "tasks"
   add_foreign_key "projects", "users"
+  add_foreign_key "reviews", "projects"
+  add_foreign_key "reviews", "users"
   add_foreign_key "submissions", "projects"
   add_foreign_key "tasks", "assignments"
   add_foreign_key "tasks", "classrooms"

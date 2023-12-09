@@ -22,6 +22,16 @@
               = task.name
             %span
               = task.phase
-  
-  .text-xl
-    To-rivju
+
+  - if @reviews.present?
+    .text-xl.mb-4
+      To-rivju
+    .flex.flex-row.mb-8
+      - @reviews.each do |review|
+        - task = review.project.task
+        = link_to project_path review.project, review_id: review.id do
+          .w-52.h-32.rounded-3xl.flex.flex-col.justify-center.items-center.bg-gradient-to-br.from-gray-100.to-gray-300
+            .font-bold
+              = task.name
+            %span
+              = task.phase

@@ -1,0 +1,3 @@
+%pre{ data: { controller: 'highlighter' } }
+  %code{ data: { highlighter_target: 'code' } }
+    = @submission.file.download

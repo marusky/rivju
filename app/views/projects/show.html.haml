@@ -16,6 +16,10 @@
         = link_to new_submission_path(project_id: @project.id, version: :first) do
           .px-12.py-2.rounded-full.bg-gradient-to-br.from-teal-400.to-sky-700.text-white
             Nahrať
+    - if @project.task.phase == :review
+      = link_to review_path(params[:review_id]) do
+        .px-12.py-2.rounded-full.bg-gradient-to-br.from-teal-400.to-sky-700.text-white
+          Rivju
 .body.flex
   .left
     .description.mb-10
