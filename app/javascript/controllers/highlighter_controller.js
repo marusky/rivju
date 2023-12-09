@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-import hljs from 'highlight.js'
 
 // Connects to data-controller="highlighter"
 export default class extends Controller {
@@ -7,7 +6,20 @@ export default class extends Controller {
 
   connect (event) {
     hljs.highlightAll()
+    hljs.initLineNumbersOnLoad();
 
-    console.log(this.codeTarget.firstChild.offsetHeight/12)
+    setTimeout(() => {
+      const tableRows = this.codeTarget.firstChild.firstChild.childNodes
+
+      tableRows.forEach((tr) => {
+        tr.addEventListener('click', () => this.chooseRow(tr))
+      })
+    }, 300)
+  }
+
+  chooseRow (tr) {
+    console.log(tr)
+    tr.style.backgroundColor = '#222444'
+    setTimeout(() => tr.style.backgroundColor = 'inherit', 300)
   }
 }
