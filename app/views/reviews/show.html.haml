@@ -1,3 +1,19 @@
-%pre{ data: { controller: 'highlighter' } }
-  %code{ data: { highlighter_target: 'code' } }
-    = @submission.file.download
+.test{ data: { controller: 'highlighter' } }
+  %pre
+    %code{ data: { highlighter_target: 'code' } }
+      = @submission.part(to_line: @comments.first&.show_after_line)
+
+  - @comments.each.with_index do |comment, index|
+    - next_comment = @comments[index + 1]
+
+    .comment{ data: { from_line: comment.from_line, to_line: comment.to_line, highlighter_target: 'comment' } }
+      = comment.content
+
+    %pre
+      %code{ data: { highlighter_target: 'code', ln_start_from: comment.show_after_line + 1 } }
+        = @submission.part(from_line: comment.show_after_line + 1, to_line: next_comment&.show_after_line)
+
+
+
+
+

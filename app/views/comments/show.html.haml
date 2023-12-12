@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @comment.user
+%p
+  %b Review:
+  = @comment.review
+%p
+  %b From line:
+  = @comment.from_line
+%p
+  %b To line:
+  = @comment.to_line
+%p
+  %b Content:
+  = @comment.content
+
+= link_to 'Edit', edit_comment_path(@comment)
+\|
+= link_to 'Back', comments_path

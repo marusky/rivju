@@ -1,3 +1,17 @@
+code.hljs {
+  background: #19191c;
+}
+
 .hljs-ln tr{
   cursor: pointer;
+}
+
+.hljs .code-with-comment {
+  border-left: 5px #55e4f1 solid;
+}
+
+.comment {
+  background: #242434;
+  color: white;
+  padding: 15px 20px;
 }

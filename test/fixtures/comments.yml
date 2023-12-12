@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  review: one
+  from_line: 1
+  to_line: 1
+  content: MyText
+
+two:
+  user: two
+  review: two
+  from_line: 1
+  to_line: 1
+  content: MyText

@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/1 or /reviews/1.json
   def show
     @submission = @review.project.first_submission
+    @comments = @review.comments.order(:to_line)
   end
 
   # GET /reviews/new
